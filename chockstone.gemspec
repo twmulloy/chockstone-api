@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = %q{chockstone}
-  s.version     = %q{0.1.0}
+  s.version     = %q{0.2.0}
   s.summary     = ""
   s.description = "Wrapper for Chockstone API requests"
   s.authors     = ["Thomas Mulloy"]
@@ -10,11 +10,16 @@ Gem::Specification.new do |s|
     "lib/chockstone.rb",
     ".gitignore",
     "chockstone.gemspec",
+    "Gemfile",
     "Rakefile",
     "README.rdoc"
   ]
-  s.homepage = %q{http://thomasmulloy.com}
+  s.homepage = %q{https://github.com/teeem/chockstone-api}
   s.test_files = [
     "test/test_icle.rb"
   ]
+  s.rdoc_options = ["--charset=UTF-8"]
+  s.require_paths = ['lib']
+
+  s.add_dependency('libxml-ruby')
 end
