@@ -1,7 +1,7 @@
 = Chockstone API
 
 == Description
-This a Ruby interface for the Chockstone [http://www.heartlandpaymentsystems.com/loyaltymarketing] service.
+This a Ruby interface for the Chockstone API service.
 
 == Installation
   gem install chockstone
