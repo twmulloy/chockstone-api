@@ -1,0 +1,56 @@
+= Chockstone API
+
+== Description
+This a Ruby interface for the Chockstone [http://www.heartlandpaymentsystems.com/loyaltymarketing/] service.
+
+== Installation
+  gem install chockstone
+
+== Example
+  require 'rubygems'
+  require 'chockstone'
+
+  cs = Chockstone::Connection.new({
+    :url            => "MY_API_URL",
+    :domain         => "MY_API_DOMAIN",
+    :profile        => "MY_API_PROFILE",
+    :seller_profile => "MY_API_SELLER_PROFILE",
+    :password       => "MY_API_PASSWORD"
+  })
+
+  # verify user credentials
+  cs.authenticate_user('their_email@email.com', 'their_password')
+
+  # create new user
+  cs.create_user({
+      :id         => 'their_email@email.com',
+      :password   => 'their_password',
+      :title      => 'Mr.',
+      :first_name => 'The Lord Viper',
+      :last_name  => 'Scorpion',
+      :street     => "123 Fake St.",
+      :city       => '',
+      :state_or_province => '',
+      :postal_code => '',
+      :country    => 'USA',
+      :email      => 'their_email@email.com',
+      :email_opt_in => 0,
+      :voice_phone => '',
+      :other_phone => '',
+      :birth_date => {
+        :year     => '',
+        :month    => '',
+        :day      => ''
+      }
+    })
+
+    # create a new user and account (provide a hash of authorization method as a 2nd argument to create_user)
+    cs.create_user({
+      #...
+      },{
+        :pin_authorization => {
+          :id => '1234123412341234',
+          :pin => '4321'
+        }
+      }
+    })
