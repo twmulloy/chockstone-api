@@ -1,3 +1,4 @@
 doc/*
 *.gem
 Gemfile.lock
+test/test_icle_private.rb

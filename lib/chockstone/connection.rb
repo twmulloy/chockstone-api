@@ -126,23 +126,27 @@ module Chockstone
       p = XML::Parser.string(resp)
       doc = p.parse
 
-      #puts "RESPONSE: " + doc.to_s
-
       response = doc.find('//response')[0]
       status = response.find('//status')[0]
+
+      alert_name = status.find('//alert-name')[0]
+      alert_type = status.find('//alert-type')[0]
+
+      alert = {
+        :name => alert_name ? alert_name.content : nil,
+        :type => alert_type ? alert_type.content : nil
+      }
+
       method = status.find('//type')[0].content
       data = Hash.from_xml(response.find("//#{method}")[0].to_s)
 
       formatted_response = {
         :status => status.find('//code')[0].content,
-        :alert => {
-          :name => code = status.find('//alert-name')[0].content,
-          :type => code = status.find('//alert-type')[0].content
-        },
         :method => method,
         :description => status.find('//description')[0].content
       }
 
+      formatted_response.merge!({ :alert => alert }) unless alert[:name].nil? and alert[:type].nil?
       formatted_response.merge!({ :data => data }) unless data.blank?
 
       formatted_response
@@ -166,8 +170,6 @@ module Chockstone
       req = xml.find('//request')[0]
       req.attributes['version'] = '1'
       req.attributes['revision'] = '1'
-
-      #puts "REQUEST: " + xml.to_s
 
       send(xml)
     end
