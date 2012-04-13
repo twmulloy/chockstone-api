@@ -147,7 +147,7 @@ module Chockstone
       }
 
       formatted_response.merge!({ :alert => alert }) unless alert[:name].nil? and alert[:type].nil?
-      formatted_response.merge!({ :data => data }) unless data.blank?
+      formatted_response.merge!({ :data => key_to_sym(data) }) unless data.blank?
 
       formatted_response
 
@@ -186,6 +186,12 @@ module Chockstone
         }
       }
 
+    end
+
+    def key_to_sym hash
+      return hash unless hash.is_a?(Hash)
+      hash = hash.inject({}){|memo,(k,v)| memo[k.to_sym] = s_key_to_sym(v); memo}
+      hash
     end
   end
 

@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = %q{chockstone}
-  s.version     = %q{0.3.0}
+  s.version     = %q{0.3.1}
   s.summary     = ""
   s.description = "Wrapper for Chockstone API requests"
   s.authors     = ["Thomas Mulloy"]
