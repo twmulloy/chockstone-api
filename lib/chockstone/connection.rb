@@ -190,7 +190,7 @@ module Chockstone
 
     def key_to_sym hash
       return hash unless hash.is_a?(Hash)
-      hash = hash.inject({}){|memo,(k,v)| memo[k.to_sym] = s_key_to_sym(v); memo}
+      hash = hash.inject({}){|memo,(k,v)| memo[k.to_sym] = key_to_sym(v); memo}
       hash
     end
   end
