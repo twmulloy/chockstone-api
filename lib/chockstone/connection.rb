@@ -109,6 +109,26 @@ module Chockstone
 
     end
 
+    # not implemented
+    def get_account_balance 
+
+    end
+
+    def transfer_account from, to
+      request('transfer-account',
+        :from => {
+          :account => {
+            :id => from
+          }
+        },
+        :to => {
+          :account => {
+            :id => to
+          }
+        }
+      ) 
+    end
+
 
   private
 
@@ -125,6 +145,8 @@ module Chockstone
 
       p = XML::Parser.string(resp)
       doc = p.parse
+
+      #puts doc
 
       response = doc.find('//response')[0]
       status = response.find('//status')[0]
@@ -170,6 +192,8 @@ module Chockstone
       req = xml.find('//request')[0]
       req.attributes['version'] = '1'
       req.attributes['revision'] = '1'
+
+      #puts xml
 
       send(xml)
     end
