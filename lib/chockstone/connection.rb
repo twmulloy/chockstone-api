@@ -191,7 +191,8 @@ module Chockstone
       # apply attributes to request node
       req = xml.find('//request')[0]
       req.attributes['version'] = '1'
-      req.attributes['revision'] = '1'
+      req.attributes['revision'] = '2'
+      req.attributes['expirationDetail'] = 'true'
 
       #puts xml
 
