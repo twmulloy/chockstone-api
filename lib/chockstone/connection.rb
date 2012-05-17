@@ -138,7 +138,9 @@ module Chockstone
     #   }
     # }
     def get_account_balance authorization={}
-      request('get-account-balance', authorization)
+      request('get-account-balance', 
+        :account => authorization
+      )
     end
 
     # need to pass the authorization request block as a hash
@@ -164,18 +166,24 @@ module Chockstone
     def update_account_alias account_id, authorization={}
 
       req = {
-        :account => {
-          :id => account_id
-        }
+        :id => account_id
       }
 
       req.merge!(authorization)
 
-      request('update-account-alias', req)
+      request('update-account-alias', 
+        :account => req
+      )
     end
 
 
     # page argument needs to be a hash with the page
+    # at a bare minimum your page argument hash needs to include:
+    # {
+    #   :number => 1,
+    #   :transactions_per_page => 50,
+    #   :sort_by_date => 'descending' #(descending|ascending)
+    # }
     def view_account_activity account_id, page={}
 
       request('view-account-activity',  
