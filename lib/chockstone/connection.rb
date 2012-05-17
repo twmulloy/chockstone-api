@@ -109,9 +109,81 @@ module Chockstone
 
     end
 
-    # not implemented
-    def get_account_balance 
+    # need to pass the authorization request block as a hash
+    # ex. "pin authorization":
+    # {
+    #   :pin_authorization => {
+    #     :id => '6277111111111111',
+    #     :pin => '1234'
+    #   }
+    # }
+    # 
+    # ex. "credit-card-authorization":
+    # {
+    #   :credit_card_authorization => {
+    #     :number => '',
+    #     :expiration_date => {
+    #       :month => '',
+    #       :year => ''
+    #     },
+    #     :cvv2 => ''
+    #   }
+    # }
+    # 
+    # ex. "phone-number-authorization":
+    # {
+    #   :phone_number_authorization => {
+    #     :number => '',
+    #     :pin => ''
+    #   }
+    # }
+    def get_account_balance authorization={}
+      request('get-account-balance', authorization)
+    end
 
+    # need to pass the authorization request block as a hash
+    # ex. "credit-card-authorization":
+    # {
+    #   :credit_card_authorization => {
+    #     :number => '',
+    #     :expiration_date => {
+    #       :month => '',
+    #       :year => ''
+    #     },
+    #     :cvv2 => ''
+    #   }
+    # }
+    # 
+    # ex. "phone-number-authorization":
+    # {
+    #   :phone_number_authorization => {
+    #     :number => '',
+    #     :pin => ''
+    #   }
+    # }
+    def update_account_alias account_id, authorization={}
+
+      req = {
+        :account => {
+          :id => account_id
+        }
+      }
+
+      req.merge!(authorization)
+
+      request('update-account-alias', req)
+    end
+
+
+    # page argument needs to be a hash with the page
+    def view_account_activity account_id, page={}
+
+      request('view-account-activity',  
+        :account => {
+          :id => account_id
+        },
+        :page => page
+      )
     end
 
     def transfer_account from, to
@@ -128,6 +200,8 @@ module Chockstone
         }
       ) 
     end
+
+
 
 
   private
