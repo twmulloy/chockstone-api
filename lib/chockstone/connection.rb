@@ -214,7 +214,7 @@ module Chockstone
 
   private
 
-    def send xml
+    def transmit xml
       http = Net::HTTP.new(@host, @port)
       http.use_ssl = true if @scheme == "https"
       request = Net::HTTP::Post.new(@path)
@@ -278,7 +278,7 @@ module Chockstone
 
       #puts xml
 
-      send(xml)
+      transmit(xml)
     end
 
     # connection node for request
